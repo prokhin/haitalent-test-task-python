@@ -1,10 +1,17 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Wait for PostgreSQL to be ready
-until pg_isready -h db -p 5432 -U "$POSTGRES_USER" >/dev/null 2>&1; do
+# Wait for PostgreSQL to be ready with timeout
+for i in {1..60}; do
+  if pg_isready -h db -p 5432 -U "$POSTGRES_USER" >/dev/null 2>&1; then
+    break
+  fi
   echo "Waiting for PostgreSQL..."
   sleep 1
+  if [ "$i" -eq 60 ]; then
+    echo "PostgreSQL not ready after 60 seconds"
+    exit 1
+  fi
 done
 
 # Prepare clean test database

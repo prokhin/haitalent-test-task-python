@@ -10,7 +10,7 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 # Если используешь psycopg[binary], можно обойтись и без build-essential,
 # но оставим универсально.
 RUN apt-get update && apt-get install -y --no-install-recommends \
-      build-essential curl \
+      build-essential curl postgresql-client \
     && rm -rf /var/lib/apt/lists/*
 
 # 4) Рабочая директория
