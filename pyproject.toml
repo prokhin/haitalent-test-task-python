@@ -1,0 +1,32 @@
+[tool.poetry]
+name = "qa-api"
+version = "0.1.0"
+description = "Q&A service with FastAPI and SQLAlchemy"
+authors = ["Your Name <you@example.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+fastapi = "^0.110.0"
+uvicorn = {extras = ["standard"], version = "^0.27.1"}
+sqlalchemy = "^2.0.28"
+psycopg = {extras = ["binary"], version = "^3.1.18"}
+alembic = "^1.13.1"
+pydantic = {extras = ["email"], version = "^2.6.4"}
+pydantic-settings = "^2.2.1"
+python-json-logger = "^2.0.7"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.0.2"
+httpx = "^0.27.0"
+ruff = "^0.2.2"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.ruff]
+line-length = 88
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I"]
