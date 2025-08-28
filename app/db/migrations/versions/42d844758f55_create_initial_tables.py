@@ -23,7 +23,7 @@ def upgrade() -> None:
     op.create_table('questions',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('text', sa.String(), nullable=False),
-    sa.Column('created_at', sa.DateTime(), server_default=sa.text('now()'), nullable=False),
+    sa.Column('created_at', sa.DateTime(), server_default=sa.text('CURRENT_TIMESTAMP'), nullable=False),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('answers',
@@ -31,7 +31,7 @@ def upgrade() -> None:
     sa.Column('question_id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.String(), nullable=False),
     sa.Column('text', sa.String(), nullable=False),
-    sa.Column('created_at', sa.DateTime(), server_default=sa.text('now()'), nullable=False),
+    sa.Column('created_at', sa.DateTime(), server_default=sa.text('CURRENT_TIMESTAMP'), nullable=False),
     # Явно указываем каскадное удаление на уровне БД
     sa.ForeignKeyConstraint(['question_id'], ['questions.id'], ondelete='CASCADE'),
     sa.PrimaryKeyConstraint('id')

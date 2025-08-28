@@ -1,6 +1,6 @@
 import datetime
 
-from sqlalchemy import String, func, DateTime
+from sqlalchemy import String, DateTime, text as sa_text
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.db.base import Base
@@ -15,7 +15,7 @@ class Question(Base):
     text: Mapped[str] = mapped_column(String, nullable=False)
     # Дата и время создания
     created_at: Mapped[datetime.datetime] = mapped_column(
-        DateTime, nullable=False, server_default=func.now()
+        DateTime, nullable=False, server_default=sa_text("CURRENT_TIMESTAMP")
     )
 
     # Связь с ответами. При удалении вопроса удаляются все связанные ответы
